@@ -86,12 +86,14 @@ I'll get to the custom change event later. For now, just remember that
 it's a special change event for controlled inputs that helps keep an
 input in sync with React.
 
-[mountComponent:541 - react/src/renderers/dom/shared/ReactDOMComponent.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/shared/ReactDOMComponent.js#L541)
-
 ### Getting Props
 
-Okay. We're done here. Now let's go back to ReactDOMComponent. The
-next thing that happens is that we get the initial properties for the
+
+Okay. We're done here. Now let's go back to ReactDOMComponent. 
+
+[mountComponent:541 - react/src/renderers/dom/shared/ReactDOMComponent.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/shared/ReactDOMComponent.js#L541)
+
+The next thing that happens is that we get the initial properties for the
 component. Inputs go through a special filter: getHostProps.
 
 [getHostProps:58 - react/src/renderers/dom/client/wrappers/ReactDOMInput.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/client/wrappers/ReactDOMInput.js#L58)
