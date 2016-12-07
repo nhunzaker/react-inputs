@@ -74,7 +74,7 @@ few cases that we'll talk about in a minute).
 
 ### Back to ReactDOMInput
 
-[mountWrapper:145 - react/src/renderers/dom/client/wrappers/ReactDOMInput.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/client/wrappers/ReactDOMInput.js#L84)
+[mountWrapper:84 - react/src/renderers/dom/client/wrappers/ReactDOMInput.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/client/wrappers/ReactDOMInput.js#L84)
 
 Okay! So moving along. The last thing in this function that I want to
 highlight is this `wrapperState` business. It stores some information
