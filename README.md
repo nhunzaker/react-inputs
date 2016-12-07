@@ -34,20 +34,14 @@ virtual DOM node gets converted into something real.
 
 ### mountWrapper
 
-```
-react/src/renderers/dom/shared/ReactDOMComponent.js
-512: mountComponent()
-```
+[mountComponent:512 - react/src/renderers/dom/shared/ReactDOMComponent.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/shared/ReactDOMComponent.js#L512)
 
 After assigning some member properties, mountComponent switches over
 the element's tag name. Every input is "wrapped" using
 ReactDOMInput. This bootstraps the input and conducts some
 validations. Let's step into that.
 
-```
-react/src/renderers/dom/client/wrappers/ReactDOMInput.js
-512: mountWrapper
-```
+[mountWrapper:84 - react/src/renderers/dom/client/wrappers/ReactDOMInput.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/client/wrappers/ReactDOMInput.js#L84)
 
 So before anything, in development mode, React goes through quite a
 few validations to confirm proper usage of inputs. It warns about
@@ -60,9 +54,7 @@ correctly.
 Let's break out from code review for a minute to talk about
 `defaultValue` and `value`.
 
-```
-examples/default-value.html
-```
+http://natehunzaker.com/react-inputs/examples/default-value.html
 
 So I think we're all a familiar with this code. We use `value` when
 working with a controlled input, `defaultValue` when working with an
@@ -82,10 +74,7 @@ few cases that we'll talk about in a minute).
 
 ### Back to ReactDOMInput
 
-```
-react/src/renderers/dom/client/wrappers/ReactDOMInput.js
-146: mountWrapper
-```
+[mountWrapper:145 - react/src/renderers/dom/client/wrappers/ReactDOMInput.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/client/wrappers/ReactDOMInput.js#L84)
 
 Okay! So moving along. The last thing in this function that I want to
 highlight is this `wrapperState` business. It stores some information
@@ -97,10 +86,7 @@ I'll get to the custom change event later. For now, just remember that
 it's a special change event for controlled inputs that helps keep an
 input in sync with React.
 
-```
-react/src/renderers/dom/shared/ReactDOMComponent.js
-541: mountComponent()
-```
+[mountComponent:541 - react/src/renderers/dom/shared/ReactDOMComponent.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/shared/ReactDOMComponent.js#L541)
 
 ### Getting Props
 
@@ -108,10 +94,7 @@ Okay. We're done here. Now let's go back to ReactDOMComponent. The
 next thing that happens is that we get the initial properties for the
 component. Inputs go through a special filter: getHostProps.
 
-```
-react/src/renderers/dom/client/wrappers/ReactDOMInput.js
-58: getHostProps
-```
+[getHostProps:58 - react/src/renderers/dom/client/wrappers/ReactDOMInput.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/client/wrappers/ReactDOMInput.js#L58)
 
 Okay. There's some special stuff going on here.
 
@@ -136,19 +119,12 @@ Okay! We're moving along now! Jumping back to ReactDOMComponent. After
 some DOM creation bits, where we generate markup and set properties,
 we hit another tag name switch:
 
-```
-react/src/renderers/dom/shared/ReactDOMComponent.js
-649: mountComponent()
-```
+[mountComponent:649 - react/src/renderers/dom/shared/ReactDOMComponent.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/shared/ReactDOMComponent.js#L649)
 
 First thing we see is this postMount behavior. This ties directly into
 `ReactDOMInput.postMount`:
 
-
-```
-react/src/renderers/dom/client/wrappers/ReactDOMInput.js
-224: postMountWrapper
-```
+[postMountWrapper:224 - react/src/renderers/dom/client/wrappers/ReactDOMInput.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/client/wrappers/ReactDOMInput.js#L224)
 
 Okay. Let's dive in. First we get the props for the current _element_
 associated with the component instance. Then we get the actual DOM
@@ -171,7 +147,7 @@ how it works:
 Lets see what that looks like
 
 ```
-http://localhost:4000/examples/detachment.html
+http://natehunzaker.com/react-inputs/examples/detachment.html
 ```
 
 So we can see that editing defaultValue up until the user interacts
@@ -204,10 +180,8 @@ Let's quickly run through that now.
 Whenever a change event fires, it runs through React's event plugin
 hub:
 
-```
-react/src/renderers/shared/stack/event/EventPluginHub.js
-225: ExtractEvents
-```
+[extractEvents:224 - react/src/renderers/shared/stack/event/EventPluginHub](https://github.com/facebook/react/blob/15-stable/src/renderers/shared/stack/event/EventPluginHub.js#L225)
+
 
 Most events in React are delegated, unless browsers don't play
 nice. Events bubble up to the top of the DOM tree and trigger a
@@ -221,10 +195,7 @@ may have heard of.
 If we dig into the ChangeEventPlugin, we can quickly see all of the
 work React does to normalize change events for us:
 
-```
-react/src/renderers/dom/client/eventPlugins/ChangeEventPlugin.js
-All of it
-```
+[All: react/src/renderers/dom/client/eventPlugins/ChangeEventPlugin.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/client/eventPlugins/ChangeEventPlugin.js)
 
 This plugin is a whole talk unto itself. Just know that React is doing
 a lot of work to make this happen under the hood.
@@ -234,11 +205,7 @@ What matters to us is that this eventually calls that custom
 master, this has actually gone away, but this talk is current as of
 15.4.1, and it's a necessary step along the way:
 
-
-```
-react/src/renderers/dom/client/wrappers/ReactDOMInput.js
-275: ReactDOMInput
-```
+[handleChange:275 - react/src/renderers/dom/client/wrappers/ReactDOMInput.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/client/wrappers/ReactDOMInput.js#L275)
 
 We're almost there. I promise. Most of this function actually relates
 to controlling radio buttons. Don't worry about that. The important
@@ -252,10 +219,7 @@ This is going to call onChange prop given to the input, which will
 likely result in a state change. Since state changes, it'll cue up a
 re-render of the UI with the new value.
 
-```
-react/src/renderers/dom/shared/DOMPropertyOpertions.js
-133: setValueForProperty
-```
+[setValueForProperty:133 - react/src/renderers/dom/shared/DOMPropertyOperations.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/shared/DOMPropertyOperations.js#L133)
 
 The logic is a little hard to parse. This is the part that
 matters. React sets the `value` _attribute_. This is important for
@@ -268,10 +232,7 @@ call one last function: `updateWrapper`
 
 ## updateWrapper
 
-```
-react/src/renderers/dom/client/wrappers/ReactDOMInput.js
-158: updateWrapper
-```
+[updateWrapper:158 - react/src/renderers/dom/client/wrappers/ReactDOMInput.js](https://github.com/facebook/react/blob/15-stable/src/renderers/dom/client/wrappers/ReactDOMInput.js#L158)
 
 This is how the value property actually gets updated by React. Let's
 skim past the validations and focus on what really matters.
