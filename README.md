@@ -25,7 +25,9 @@ want to cover a few items:
 2. Post mount
 3. defaultValue vs value
 4. value "detachment"
-5. Wrap up!
+6. Change events
+7. Updates
+8. Wrap up!
 
 ## Mount
 
