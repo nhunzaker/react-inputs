@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Detatchment</title>
+
+    <link rel="stylesheet" href="/lib/formbase.css" />
+  </head>
+  <body>
+    <label class="label">My Input:</label>
+
+	  <input class="input" />
+
+    <script>
+      var input = document.querySelector('.input')
+
+      // This will turn into 3
+      input.defaultValue = 3
+
+      // This will turn into 5
+      input.defaultValue = 5
+
+      // This will turn into 7
+      input.value = 7
+
+      // This will do nothing
+      input.defaultValue = 1
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Default Value</title>
+
+    <link rel="stylesheet" href="/lib/formbase.css" />
+
+    <script src="/lib/react.js"></script>
+    <script src="/lib/react-dom.js"></script>
+    <script src="/lib/babel.js"></script>
+  </head>
+  <body>
+    <div id="container">Loading the awesome</div>
+
+    <script type="text/babel">
+      const Inputs = React.createClass({
+
+        getInitialState () {
+          return {
+            value: 'Hello'
+          };
+        },
+
+        onChange (event) {
+          this.setState({
+            value: event.target.value
+          })
+        },
+
+        render () {
+          return (
+            <form>
+              <label className="label">Controlled</label>
+	            <input className="input" value={this.state.value} onChange={this.onChange} />
+
+              <label className="label">Uncontrolled</label>
+	            <input className="input" defaultValue="Wild west" />
+            </form>
+          )
+        }
+      })
+
+      ReactDOM.render(<Inputs />, document.getElementById('container'))
+    </script>
+  </body>
+</html>
